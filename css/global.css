@@ -1,0 +1,48 @@
+body {
+	background: black;
+}
+
+.tooltip-hover, .text {
+	position: absolute;
+	color: #fbe638;
+	font-family: "Arial Black", Arial, sans-serif;
+	font-size: 15px;
+	font-weight: normal;
+}
+
+.tooltip-hover img {
+	border: none;
+}
+
+#hamiltonLink {
+	top: 580px;
+	left: 138px;
+}
+
+#londonLink {
+	top: 580px;
+	left: 21px;
+}
+
+#windsorLink {
+	top: 582px;
+	left: 277px;
+}
+
+#tooltipTemplates {
+	display: none;
+}
+
+.tooltip {
+	background: black;
+}
+
+#rollOver {
+	top: 540px;
+	left: 70px;
+}
+
+#stayTuned {
+	left: 200px;
+	top: 645px;
+}
