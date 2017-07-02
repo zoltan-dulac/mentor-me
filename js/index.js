@@ -17,10 +17,23 @@ var mentorMe = new function () {
 			$body.classList.add('loaded');
 		}, 1); 
 		pp.init(me.popstateEvent);
+		
+		
+		setTimeout(function () {
+			new SpiderController({
+				imageSprite: 'js/bug/spider-sprite.png',
+				maxBugs: 2
+			});
+		}, 6000);
+		
 	};
 	
 	me.popstateEvent = function(e) {
 		currentState = e.state;
+		
+		if (!currentState) {
+			currentState = {};
+		}
 		
 		if (!currentState.f) {
 			currentState.f = 'home';

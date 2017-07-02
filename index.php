@@ -24,7 +24,7 @@
 
 	<body>
 		<header>
-		<h1><?php include "images/banner-fill.svg"; ?></h1>
+		<h1><a class="pp-link" href="?f=home"><?php include "images/banner-fill.svg"; ?></a></h1>
 			<nav>
 				<ul>
 					<li><a class="pp-link" href="?f=about">About</a></li>
@@ -65,9 +65,7 @@
 		<script type='text/javascript' src='js/bug/bug-min.js'></script>
 		<script type='text/javascript'>
 			// default spiders:
-			new SpiderController({
-				imageSprite: 'js/bug/spider-sprite.png'
-			});
+			
 		</script>
 		<script src="js/progressive-pushstate.js"></script>
 		<script src="js/index.js"></script>

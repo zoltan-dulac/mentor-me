@@ -99,8 +99,49 @@ a:hover {
 
 .splash {
 }
+/*
+ * home demo
+ */
+.home__demo--character {
+	position: absolute;
+	transform: translateZ(0);
+	opacity: 0;
+	pointer-events: none;
+}
 
-.splash__main-image {
+.home__demo .swirl {
+	width: 100vmin;
+	top: -20vmin;
+	left: 50%;
+	margin-left: -50vmin;
+	transform-origin: 50% 60%;
+}
+
+.home__demo .charles {
+	position: absolute;
+	width: 40vmin;
+	top: 0;
+	left: 0;
+}
+
+.home__demo .charles-container {
+	display: inline-block;
+	left: 42vmin;
+	top: 30vmin;
+	width: 40vmin;
+	
+}
+
+
+.home__demo .janet {
+	width: 30vmin;
+	left: 20vmin;
+	bottom: 10vmin;
+}
+
+
+
+.museum {
 	position: absolute;
 	top: 0;
 	left: 50%;
@@ -108,13 +149,133 @@ a:hover {
 
 }
 
-.splash__main-image img {
-	height: 80vmin;
+.museum img {
+	height: 80vh;
 	margin: 0 auto;
+}
+
+.loaded .museum {
+	animation: fade-in ease-in-out 2s 3s forwards;
+}
+
+.loaded .janet {
+	animation: 
+		fade-in ease-in-out 2s forwards,
+		move-janet ease-in-out 2s 6s forwards;
+}
+
+.loaded .charles-container {
+	animation:
+		fade-in ease-in-out 2s forwards,
+		move-charles ease-in-out 2s 2s forwards,
+		move-charles2 ease-in-out 2s 6s forwards;
+}
+
+.loaded .charles-container .arms-up {
+	opacity: 0;
+	animation: appear linear 0.1ms 2s forwards;
+}
+
+.loaded .charles-container .arms-down {
+	opacity: 1;
+	animation: disappear linear 0.1ms 2s forwards;
 }
 
 
 
+.loaded .home__demo .swirl {
+	animation: 
+		fade-in ease-in-out 2s 2s forwards,
+		swirl linear 5s 2s 2,
+		fade-out ease-in-out 2s 6s forwards,
+		disappear linear 0.1ms 8s forwards;
+}
+
+@keyframes swirl {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+	
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes swirl-move-in-place {
+	
+	0% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) rotate(0deg) scaleX(1) scaleY(1);
+	}
+	
+	100% {
+		opacity: 0;
+		transform: translate3d(13vmin, 9vmin, 0) rotate(0deg) scaleX(0.19) scaleY(0.26);
+	}
+}
+
+@keyframes appear {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+
+@keyframes disappear {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes move-charles {
+	0% {
+		transform: translate3d(0, 0, 0);
+	}
+	
+	100% {
+		transform: translate3d(20vmin, -15vmin, 0);
+	}
+}
+
+@keyframes move-charles2 {
+	0% {
+		transform: translate3d(20vmin, -15vmin, 0);
+	}
+	100% {
+		transform: translate3d(calc(50vw + -51.5vh), 14.5vh, 0) scale(0.55);
+	}
+}
+
+@keyframes move-janet {
+	100% {
+		transform: translate3d(calc(50vw + -33vh), 3vh, 0) scale(0.41);
+	}
+}
 
 /*
  * Logos
@@ -174,6 +335,12 @@ a:hover {
 .bio__entry:nth-child(2n) .bio__pic {
 	float: right;
 	margin: 0 0 1vmin 1vmin;
+}
+
+.bio__entry:after {
+	content: "";
+	display: table;
+	clear: both;
 }
 
 
