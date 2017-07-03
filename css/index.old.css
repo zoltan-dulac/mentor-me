@@ -1,0 +1,561 @@
+@import "reset.css";
+@import "sophie/stylesheet.css";
+@import "coffee-tea/stylesheet.css";
+@import "parisien-night/stylesheet.css";
+body {
+	margin: 0;
+	font-family: "coffee+teademo-Regular", "Sophie", "Helvetica", "Arial", sans-serif;
+	font-size: 3vmin;
+	line-height: 1.2;
+	
+}
+
+i {
+	display: inline-block;
+	transform: skewX(-10deg);
+}
+
+p {
+	margin-bottom: 2.5vmin;
+}
+
+#banner {
+	height: 9vmin;
+}
+
+.visually-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+header {
+	position: absolute;
+	top: 0;
+	width: 100vw;
+	height: 14vmin;
+	padding: 1vmin;
+	text-align: center;
+	z-index: 10;
+	background-color: rgba(255, 255, 255, 0);
+	border-bottom: solid 1px transparent;
+	transition: 
+		border-bottom ease-in-out 2s 8s,
+		background-color ease-in-out 2s 8s;
+}
+
+h1 {
+	
+	font-size: 7vmin;
+}
+
+h1 span {
+	position: relative
+}
+
+/*
+h1 span:first-child {
+	left: 5vw;
+}
+
+h1 span:last-child {
+	left: -5vw;
+	top: 6vmin;
+} */
+
+nav {
+	position: absolute;
+	width: 100vw;
+	top: 10vmin;
+	z-index: 10;
+	font-size: 4vmin;
+	opacity: 0;
+	transition: opacity 2s ease-in-out 8s;
+}
+
+nav ul {
+	width: 100vw;
+	text-align: center;
+}
+
+nav li {
+	display: inline-block;
+	margin-right: 4vw;
+}
+
+nav li:last-child {
+	margin-right: 0;
+}
+
+a {
+	color: #000077;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.splash {
+}
+/*
+ * home demo
+ */
+.home__demo--character {
+	position: absolute;
+	transform: translateZ(0);
+	opacity: 0;
+	pointer-events: none;
+}
+
+.home__demo .swirl {
+	width: 100vmin;
+	top: -20vmin;
+	left: 50%;
+	margin-left: -50vmin;
+	transform-origin: 50% 60%;
+}
+
+.home__demo .charles {
+	position: absolute;
+	width: 40vmin;
+	top: 0;
+	left: 0;
+}
+
+.home__demo .charles-container {
+	display: inline-block;
+	left: 42vmin;
+	top: 30vmin;
+	width: 40vmin;
+	
+}
+
+
+.home__demo .janet {
+	width: 30vmin;
+	left: 20vmin;
+	bottom: 10vmin;
+}
+
+
+
+.museum {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -31vmin;
+
+}
+
+.museum img {
+	height: 80vh;
+	margin: 0 auto;
+}
+
+.loaded .museum {
+	animation: fade-in ease-in-out 2s 3s forwards;
+}
+
+.loaded .janet {
+	animation: 
+		fade-in ease-in-out 2s forwards,
+		move-janet ease-in-out 2s 6s forwards;
+}
+
+.loaded .charles-container {
+	animation:
+		fade-in ease-in-out 2s forwards,
+		move-charles ease-in-out 2s 2s forwards,
+		move-charles2 ease-in-out 2s 6s forwards;
+}
+
+.loaded .charles-container .arms-up {
+	opacity: 0;
+	animation: appear linear 0.1ms 2s forwards;
+}
+
+.loaded .charles-container .arms-down {
+	opacity: 1;
+	animation: disappear linear 0.1ms 2s forwards;
+}
+
+
+
+.loaded .home__demo .swirl {
+	animation: 
+		fade-in ease-in-out 2s 2s forwards,
+		swirl linear 5s 2s 2,
+		fade-out ease-in-out 2s 6s forwards,
+		disappear linear 0.1ms 8s forwards;
+}
+
+.loaded header {
+	border-bottom: solid 1px black;
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+.loaded nav {
+	opacity: 1;
+}
+
+@keyframes swirl {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+	
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes swirl-move-in-place {
+	
+	0% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) rotate(0deg) scaleX(1) scaleY(1);
+	}
+	
+	100% {
+		opacity: 0;
+		transform: translate3d(13vmin, 9vmin, 0) rotate(0deg) scaleX(0.19) scaleY(0.26);
+	}
+}
+
+@keyframes appear {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+
+@keyframes disappear {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes move-charles {
+	0% {
+		transform: translate3d(0, 0, 0);
+	}
+	
+	100% {
+		transform: translate3d(20vmin, -15vmin, 0);
+	}
+}
+
+@keyframes move-charles2 {
+	0% {
+		transform: translate3d(20vmin, -15vmin, 0);
+	}
+	100% {
+		transform: translate3d(calc(50vw + -51.5vh), 14.5vh, 0) scale(0.55);
+	}
+}
+
+@keyframes move-janet {
+	100% {
+		transform: translate3d(calc(50vw + -33vh), 3vh, 0) scale(0.41);
+	}
+}
+
+/*
+ * Logos
+ */
+.logos {
+    position: absolute;
+    top: 81vmin;
+    text-align: center;
+    width: 100%;
+}
+
+footer {
+    transition: opacity 2s ease-in-out 8s;
+    opacity: 0;
+}
+
+.loaded footer {
+	opacity: 1;
+}
+
+
+.logos li {
+	display: inline-block;
+	margin-right: 1vw;
+}
+
+.logos li:last-child {
+	margin-right: 0;
+}
+
+.logos img {
+	height: 8vmin;
+}
+
+
+.coming-soon {
+	font-size: 3vmin;
+	margin-bottom: 1vmin;
+}
+
+
+.previous-productions {
+	position: absolute;
+	top: 92vmin;
+	width: 100vw;
+	text-align: center;
+}
+
+
+/* 
+ * Bio page
+ */
+.bio__entry {
+	border-bottom: solid 1px black;
+	margin-bottom: 3vmin;
+}
+
+
+
+.bio__pic {
+	float: left;
+	margin: 0 1vmin 1vmin 0;
+	width: 30vmin;
+}
+
+.bio__entry:nth-child(2n) .bio__pic {
+	float: right;
+	margin: 0 0 1vmin 1vmin;
+}
+
+.bio__entry:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+
+/*
+ * Animation stuff
+ */
+
+#content.hide {
+	animation: turn-off 500ms ease-in-out;
+}
+
+#content.show {
+	animation: turn-on 500ms ease-in-out;
+}
+
+
+#content[data-href] {
+	margin: 17vmin 1em 1em 1em;
+}
+
+@keyframes turn-off {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 50vw, 0);
+  }
+}
+
+@keyframes turn-on {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -50vw, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
+/*
+ * Banner SVG
+ */
+
+.tmp {
+	
+}
+
+
+
+.path {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  fill: #ffffff;
+  stroke: #000000;
+	fill-opacity: 1;
+	fill-rule: nonzero;
+	stroke-width: 4;
+	stroke-linecap: butt;
+	stroke-linejoin: miter;
+	stroke-miterlimit: 4;
+	stroke-opacity: 1;
+
+	marker: none;
+	visibility: visible;
+	display: inline;
+	overflow: visible;
+	enable-background: accumulate;
+	transform: translateZ(0);
+}
+
+body.loaded #banner .path {
+  animation: dash 400ms linear forwards;
+  animation-delay: 2000s;
+}
+
+body.loaded #banner .path:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+body.loaded #banner .path:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+body.loaded #banner .path:nth-child(3) {
+  animation-delay: 400ms;
+}
+
+body.loaded #banner .path:nth-child(4) {
+  animation-delay: 600ms;
+}
+body.loaded #banner .path:nth-child(5) {
+  animation-delay: 800ms;
+}
+body.loaded #banner .path:nth-child(6) {
+  animation-delay: 1000ms;
+}
+
+
+body.loaded #banner .path:nth-child(7) {
+  animation-delay: 1200ms;
+}
+body.loaded #banner .path:nth-child(8) {
+  animation-delay: 1400ms;
+}
+body.loaded #banner .path:nth-child(9) {
+  animation-delay: 1600ms;
+}
+body.loaded #banner .path:nth-child(10) {
+  animation-delay: 1800ms;
+}
+body.loaded #banner .path:nth-child(11) {
+  animation-delay: 2000ms;
+}
+body.loaded #banner .path:nth-child(12) {
+  animation-delay: 2200ms;
+}
+body.loaded #banner .path:nth-child(13) {
+  animation-delay: 2400ms;
+}
+body.loaded #banner .path:nth-child(14) {
+  animation-delay: 2600ms;
+}
+body.loaded #banner .path:nth-child(15) {
+  animation-delay: 2800ms;
+}
+body.loaded #banner .path:nth-child(16) {
+  animation-delay: 3000ms;
+}
+body.loaded #banner .path:nth-child(17) {
+  animation-delay: 3200ms;
+}
+body.loaded #banner .path:nth-child(18) {
+  animation-delay: 3400ms;
+}
+body.loaded #banner .path:nth-child(19) {
+  animation-delay: 3600ms;
+}
+body.loaded #banner .path:nth-child(20) {
+  animation-delay: 3800ms;
+}
+
+body.loaded #banner .path:nth-child(21) {
+  animation-delay: 4000ms;
+}
+
+body.loaded #banner .path:nth-child(22) {
+  animation-delay: 4200ms;
+}
+
+body.loaded #banner .path:nth-child(23) {
+  animation-delay: 4400ms;
+}
+
+body.loaded #banner .path:nth-child(24) {
+  animation-delay: 4600ms;
+}
+
+body.loaded #banner .path:nth-child(25) {
+  animation-delay: 4800ms;
+}
+
+body.loaded #banner .path:nth-child(26) {
+  animation-delay: 5000ms;
+}
+
+body.loaded #banner .path:nth-child(27) {
+  animation-delay: 5200ms;
+}
+
+body.loaded #banner .path:nth-child(28) {
+  animation-delay: 5400ms;
+}
+
+
+
+
+@keyframes dash {
+	0% {
+    stroke-dashoffset: 3000;
+    fill: #ffffff;
+  }
+  80% {
+    stroke-dashoffset: 0;
+    fill: #ffffff;
+  }
+  
+  100% {
+  	stroke-dashoffset: 0;
+    fill: #000000;
+  }
+}

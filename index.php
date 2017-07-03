@@ -16,13 +16,19 @@
 		<meta name="twitter:image" content="previews/index.jpg">
 		<meta name="author" content="Lorne Hiro and Zoltan Hawryluk">
 
-		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 		<link rel="stylesheet" href="css/index.css" type="text/css" />
 
 	</head>
 
-	<body>
+	<body data-href="<?php
+				if (isset($_GET['f'])) {
+					echo $_GET['f'];
+				} else {
+					echo 'home';
+				}
+			?>">
 		<header>
 		<h1><a class="pp-link" href="?f=home"><?php include "images/banner-fill.svg"; ?></a></h1>
 			<nav>
@@ -35,13 +41,7 @@
 				</ul>
 			</nav>
 		</header>
-		<main id="content" 
-			<?php
-				if (isset($_GET["f"])) {
-					echo "data-href";
-				}
-			?>
-		>
+		<main id="content">
 			<?php
 				if (isset($_GET["f"])) {
 					$fragment = $_GET["f"];

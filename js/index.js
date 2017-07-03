@@ -125,7 +125,7 @@ var mentorMe = new function () {
  		window.scrollTo(0, 0);
  		$animatedArea.removeEventListener('animationend', showTransitionEndEvent);
  		$animatedArea.classList.remove('show', 'hide');
- 		$animatedArea.setAttribute('data-href', currentState.f);
+ 		$body.setAttribute('data-href', currentState.f);
  	}
 	 
 };
