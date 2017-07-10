@@ -21,14 +21,22 @@
 		<link rel="stylesheet" href="css/index.css" type="text/css" />
 
 	</head>
+	
+	<?php
+		/* Preload cache list grabbed by
+		for i in "`find . -name "*.html"` index.php"; do  grep src $i; done | awk -F'src="' '{print $2}' | awk -F'"' '{print $1}'| grep images | sed "s/images\///g" | sort -u
+	*/?>
 
-	<body data-href="<?php
-				if (isset($_GET['f'])) {
-					echo $_GET['f'];
-				} else {
-					echo 'home';
-				}
-			?>">
+	<body
+		data-href="<?php
+			if (isset($_GET['f'])) {
+				echo $_GET['f'];
+			} else {
+				echo 'home';
+			}?>"
+		data-preload-images="bios/mobile/Chris-Zamat.jpg,bios/mobile/Erin-Eldershaw.jpg,bios/mobile/Fiona-Haque.jpg,bios/mobile/Francesco-Galle.jpg,bios/mobile/Gabe-Cameron.jpg,bios/mobile/Lorne-Hiro.jpg,bios/mobile/Sally-Jones.jpg,bios/mobile/Tracy-Rankin.jpg,bios/mobile/Zoltan-Hawryluk.jpg,bios/mobile/janet-banks.jpg,charles-arm-down-800.svgz,charles-arm-up-800.svgz,hiroic.svg,janet-800.svgz,social/email.svg,social/facebook.svg,social/instagram.svg,social/phone.svg,social/twitter.svg,swirl-1225.svgz,victoria-fringe.svg,windsor-fringe.svg"
+		data-image-dir="images"	
+	>
 		<header>
 		<h1><a class="pp-link" href="?f=home"><?php include "images/banner-fill.svg"; ?></a></h1>
 			<nav>
@@ -76,6 +84,11 @@
 				aria-relevant="all"
 				aria-live="assertive"
 			>Now displaying the <strong class="page-name"><?php echo $_GET["f"]; ?></strong> page.</div>
+			
+		<progress id="preloader" max="21" value="0">
+			<strong>Loaded 0%.</strong>
+		</progress>
+		
 		<script type='text/javascript' src='js/bug/bug-min.js'></script>
 		<script type='text/javascript'>
 			// default spiders:

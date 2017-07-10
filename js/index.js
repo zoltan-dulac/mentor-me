@@ -1,3 +1,69 @@
+
+var preloader = new function () {
+  var me = this,
+    dataset = document.body.dataset,
+    preloadImages = dataset.preloadImages ? dataset.preloadImages.split(',') : [],
+    imageDir = dataset.imageDir,
+    preloadSounds = dataset.preloadSounds ? dataset.preloadSounds.split(',') : [],
+    totalToLoad = preloadImages.length + preloadSounds.length,
+    soundDir = dataset.soundDir,
+    images = [],
+    numLoaded = 0,
+    el = document.getElementById('preloader'),
+    i;
+    
+    function assetErrorHandler(e) {
+      console.error(`Error: invalid image ${e.target.src}`);
+      assetLoadHandler();
+    }
+    
+    
+    function assetLoadHandler() {
+      requestAnimationFrame(imageLoadFrame);
+    }
+    
+    function imageLoadFrame() {
+      numLoaded ++;
+      if (numLoaded == images.length) {
+        el.className = 'hidden';
+        me.callback();
+      }
+      
+      el.value = numLoaded;
+      el.innerHTML = `<strong>Loaded ${numLoaded * 100 / images.length}%.`
+    }
+    
+    
+    
+    me.init = function(callback) {
+      me.callback = callback;
+      for (i = 0; i < preloadImages.length; i++) {
+        var image = new Image();
+        image.onload = assetLoadHandler;
+        image.onerror = assetErrorHandler;
+        image.src = `${imageDir}/${preloadImages[i]}`;
+        images.push(image);
+      }
+      
+      for (i=0; i<preloadSounds.length; i++) {
+        var file = preloadSounds[i];
+        
+        // Don't execute if Howl lib not loaded.
+        if (window.Howl) {
+          game.sounds[file] = new Howl({
+            autoplay: (i === 'kc-move'),
+            src: ['sounds/' + file + '.wav'],
+            loop: (i === 'kc-move'),
+            onload: assetLoadHandler,
+            onloaderror: assetErrorHandler,
+          });
+        }
+      }
+    }
+}
+
+
+
 var mentorMe = new function () {
 	
 	var me = this,
@@ -13,6 +79,10 @@ var mentorMe = new function () {
 		newContent;
 	
 	me.init = function () {
+	  preloader.init(me.onLoad);
+	}
+	
+	me.onLoad = function () {
 		setTimeout(function() {
 			$body.classList.add('loaded');
 		}, 1); 
