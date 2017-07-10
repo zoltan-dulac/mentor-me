@@ -189,13 +189,13 @@ nav {
 	
 	&:before, &:after {
 		content: "";
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100vw;
 		height: 100vh;
 		opacity: 0.2;
-		transition: opacity 250ms ease-in-out 10ms;
+		transition: opacity 250ms ease-in-out 100ms;
 		z-index: -1;
 		}
 	
@@ -208,6 +208,7 @@ nav {
 	
 	&.hide {
 		&:before, &:after {
+			opacity: 0.21;
 			display: none;
 		}
 	}
