@@ -32,14 +32,28 @@
 		<header>
 		<h1><a class="pp-link" href="?f=home"><?php include "images/banner-fill.svg"; ?></a></h1>
 			<nav>
-				<ul>
+				<ul class="desktop-nav">
 					<li><a class="pp-link" href="?f=about">About</a></li>
 					<li><a class="pp-link" href="?f=dates-times">Dates and Times</a></li>
 					<li><a class="pp-link" href="?f=bios">Bios</a></li>
 					<li><a class="pp-link" href="?f=contact">Contact</a></li>
-					<li><a class="pp-link" href="?f=press">Press</a></li>
+					<li class="social"><a target="_blank" href="https://www.facebook.com/Hiroic-Productions-113065348728921/"><img class="nav-logo" src="images/social/facebook.svg" alt="Hiroic Productions' Facebook page" /></a></li>
+					<li class="social"><a target="_blank" href="https://twitter.com/HiroicActors"><img class="nav-logo" src="images/social/twitter.svg" alt="Hiroic Productions' Twitter page" /></a></li>
+					<li class="social"><a target="_blank" href="https://www.instagram.com/hiroic_artist/"><img class="nav-logo" src="images/social/instagram.svg" alt="Hiroic Productions' Instagram page" /></a></li>
 				</ul>
+				<form class="pp-form mobile-nav" data-pp-events="change">
+					<select name="f">
+						<option value="home" selected>Home</option>
+						<option value="about">About</option>
+						<option value="dates-times">Dates and Times</option>
+						<option value="bios">Bios</option>
+						<option value="contact">Contact</option>
+						<option value="press">Press</option>
+					</select>
+					
+				</form>
 			</nav>
+			
 		</header>
 		<main id="content">
 			<?php

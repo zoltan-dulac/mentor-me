@@ -26,6 +26,11 @@ var mentorMe = new function () {
 			});
 		}, 6000);
 		
+		$body.addEventListener('animationend', function (e) {
+			if (e.animationName === 'dash') {
+				e.target.classList.add('animation-done');
+			}
+		})
 	};
 	
 	me.popstateEvent = function(e) {
@@ -88,8 +93,17 @@ var mentorMe = new function () {
 		 */
 			 
 		} else {
+			
 			$animatedArea.addEventListener('animationend', hideTransitionEndEvent);
 			newContent = cache[currentState.f];
+			/*
+			 * For home -- we want to restart the animation without the navigation
+			 */
+			console.log('asdad', currentState.f);
+			if (currentState.f === 'home') {
+				$body.classList.remove('loaded');
+				
+			}
 			$animatedArea.classList.remove('show');
 			$animatedArea.classList.add('hide');
 			readATNowShowingMessage(currentState.f);
@@ -116,6 +130,8 @@ var mentorMe = new function () {
 		
 		$animatedArea.classList.remove('hide');
 		$animatedArea.classList.add('show');
+		
+ 		$body.setAttribute('data-href', currentState.f);
  	}
  	
  	function showTransitionEndEvent(e) {
@@ -125,7 +141,7 @@ var mentorMe = new function () {
  		window.scrollTo(0, 0);
  		$animatedArea.removeEventListener('animationend', showTransitionEndEvent);
  		$animatedArea.classList.remove('show', 'hide');
- 		$body.setAttribute('data-href', currentState.f);
+ 		$body.classList.add('loaded');
  	}
 	 
 };

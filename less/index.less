@@ -1,23 +1,55 @@
 @import "reset.css";
-@import "sophie/stylesheet.css";
 @import "coffee-tea/stylesheet.css";
-@import "parisien-night/stylesheet.css";
+@import "throw/stylesheet.css";
 
 @museum-height-unit: 'vh';
+
+/* I like the breakpoint shortcodes from https://codepen.io/ericrasch/pen/HzoEx */
+@mobile-mq:	~"only screen and (max-width: 529px)";
+
+/* Project specific breakpoint shortcodes */
+@break-banner-mq: ~"only screen and (max-width: 860px)";
+@banner-scale-mq: ~"only screen and (max-width: 600px)";
+
+@desktop-header-height: 5.5em;
+@break-banner-header-height: 8.6em;
+@mobile-header-height: 8em;
+
+
 
 /*
  * General styles 
  */
 body {
 	margin: 0;
-	font-family: "coffee+teademo-Regular", "Sophie", "Helvetica", "Arial", sans-serif;
-	font-size: 3vh;
-	line-height: 1.2;
+	font-family: "coffee+teademo-Regular", "Helvetica", "Arial", sans-serif;
+	font-size: 1.5em;
+	overflow-x: hidden;
 	
+	/*
+	 * Why such an interesting line-height?  Because the photos on the bio page
+	 * are different heights and I didn't have time to mess around with them.  This
+	 * minimizes the amount of white-space at the bottom of the photos on the
+	 * desktop breakpoint.
+	 */
+	line-height: 1.32;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "ThrowMyHandsUpintheAir-Bold", "Sophie", "Helvetica", "Arial", sans-serif;
+}
+
+h2 {
+	font-size: 2em;
+	margin: 0 0 1em 0;
+}
+
+h3 {
+	margin: 3em 0 1em 0;
 }
 
 i, em {
-	display: inline-block;
+	display: inline-flex;
 	transform: skewX(-10deg);
 }
 
@@ -38,7 +70,28 @@ a {
 
 
 #banner {
-	height: 9vmin;
+	@banner-height: 90px;
+	height: @banner-height;
+	overflow: visible;
+	
+	@media @break-banner-mq {
+		@banner-width: 575px;
+		
+		position: absolute;
+		left: 50%;
+		margin-left: -@banner-width / 2;
+		clip: rect(0 @banner-width 400px 0);
+		
+		.wonderland {
+			transform: scale(1.2) translate3d(-2630px, 407px, 0)
+		}
+	}
+	
+	@media @banner-scale-mq {
+		width: 139vw;
+		left: 2.5vw;
+		margin-left: 0;
+	}
 }
 
 .visually-hidden {
@@ -56,30 +109,33 @@ header {
 	position: absolute;
 	top: 0;
 	width: 100vw;
-	height: 14vmin;
+	height: @desktop-header-height;
 	padding: 1vmin;
 	text-align: center;
 	z-index: 10;
 	background-color: rgba(255, 255, 255, 0);
 	border-bottom: solid 1px transparent;
-	transition: 
-		border-bottom ease-in-out 2s 8s,
-		background-color ease-in-out 2s 8s;
-		
-	.loaded & {
-		border-bottom: solid 1px black;
-		background-color: rgba(255, 255, 255, 0.6);
+	
+	@media @break-banner-mq {
+		height: @break-banner-header-height;
+	}
+	
+	@media @mobile-mq {
+		height: @mobile-header-height;
+	}
+	
+	
+	.nav-logo {
+		height: 0.9em;
 	}
 }
 
 nav {
 	position: absolute;
 	width: 100vw;
-	top: 10vmin;
+	bottom: 0.1em;
 	z-index: 10;
-	font-size: 4vmin;
 	opacity: 0;
-	transition: opacity 2s ease-in-out 8s;
 	
 	ul {
 		width: 100vw;
@@ -89,9 +145,28 @@ nav {
 	li {
 		display: inline-block;
 		margin-right: 4vw;
+		
+		&.social {
+			margin-right: 0.3em;
+			transform: translateY(0.2em);
+		}
 	
 		&:last-child {
 			margin-right: 0;
+		}
+	}
+	
+	.mobile-nav {
+		display: none;
+		
+		@media @mobile-mq {
+			display: inherit;
+		}
+	}
+	
+	.desktop-nav {
+		@media @mobile-mq {
+			display: none;
 		}
 	}
 }
@@ -104,6 +179,80 @@ nav {
   .bug {
     display: none;
   }
+}
+
+[data-href="about"] #content{
+	text-shadow: 
+		2px 2px 2px #fff,
+		-2px -2px 2px #fff;
+	
+	&:before, &:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		opacity: 0.2;
+		transition: opacity 250ms ease-in-out 10ms;
+		z-index: -1;
+		}
+	
+	&.show {
+		&:before, &:after {
+			display: block;
+			opacity: 0;
+		}
+	}
+	
+	&.hide {
+		&:before, &:after {
+			display: none;
+		}
+	}
+	
+	&:before {
+		background: url(../images/janet-800.svgz) no-repeat 10vw bottom;
+		top: -10vh;
+		background-size: auto 50vmin;
+	}
+	
+	&:after {
+		background: url(../images/charles-800.svgz) no-repeat right 10vh;
+		
+		background-size: auto 50vmin;
+		
+		@media @break-banner-mq {
+			top: @break-banner-header-height / 2;
+		}
+	}
+	
+}
+
+[data-href="dates-times"] {
+	text-align: center;
+	
+	.logo {
+		height: 4em;
+		margin-bottom: 1em;
+	}
+}
+
+[data-href="contact"] {
+	
+	main {
+		text-align: center;
+		
+		ul {
+			display: inline-block;
+			text-align: left;
+			line-height: 1.7;
+		}
+		
+		.nav-logo {
+			height: 0.9em;
+		}
+	}
 }
 
 /*
@@ -159,6 +308,7 @@ nav {
 	top: 0;
 	left: 50vw;
 	margin-left: ~'-31@{museum-height-unit}';
+	clip: rect(2px 100vw 100vh 0); 
 
 	img {
 		height: ~'80@{museum-height-unit}';
@@ -168,45 +318,77 @@ nav {
 
 .loaded {
 	
-	.museum {
-		animation: fade-in ease-in-out 2s 3s forwards;
-	}
-	
-	.janet {
-		animation: 
-			fade-in ease-in-out 2s forwards,
-			move-janet ease-in-out 2s 6s forwards;
-	}
-	
-	.charles-container {
-		animation:
-			fade-in ease-in-out 2s forwards,
-			move-charles ease-in-out 2s 2s forwards,
-			move-charles2 ease-in-out 2s 6s forwards;
-	}
-	
-	.charles-container .arms-up {
-		opacity: 0;
-		animation: appear linear 0.1ms 2s forwards;
-	}
-	
-	.charles-container .arms-down {
-		opacity: 1;
-		animation: disappear linear 0.1ms 2s forwards;
-	}
-	
-	.home__demo .swirl {
-		animation: 
-			fade-in ease-in-out 2s 2s forwards,
-			swirl linear 5s 2s 2,
-			fade-out ease-in-out 2s 6s forwards,
-			disappear linear 0.1ms 8s forwards;
+
+	/*
+	 * Header and Footer are controlled by transitions
+	 */
+	header {
+		border-bottom: solid 1px black;
+		background-color: rgba(255, 255, 255, 0.6);
 	}
 	
 	nav {
 		opacity: 1;
 	}
 	
+	footer {
+		opacity: 1;
+	}
+		
+	&[data-href="home"] {
+		header {
+			transition: 
+				border-bottom ease-in-out 2s 8s,
+				background-color ease-in-out 2s 8s;
+		}
+		
+		nav {
+			transition: opacity 2s ease-in-out 8s;
+		}
+		
+		footer {
+			transition: opacity 2s ease-in-out 8s;
+		}
+		/*
+		 * The rest are controlled by animations
+		 */
+		
+		.museum {
+			animation: fade-in ease-in-out 2s 3s forwards;
+		}
+		
+		.janet {
+			animation: 
+				fade-in ease-in-out 2s forwards,
+				move-janet ease-in-out 2s 6s forwards;
+		}
+		
+		.charles-container {
+			animation:
+				fade-in ease-in-out 2s forwards,
+				move-charles ease-in-out 2s 2s forwards,
+				move-charles2 ease-in-out 2s 6s forwards;
+		}
+		
+		.charles-container .arms-up {
+			opacity: 0;
+			animation: appear linear 0.1ms 2s forwards;
+		}
+		
+		.charles-container .arms-down {
+			opacity: 1;
+			animation: disappear linear 0.1ms 2s forwards;
+		}
+		
+		.home__demo .swirl {
+			animation: 
+				fade-in ease-in-out 2s 2s forwards,
+				swirl linear 5s 2s 2,
+				fade-out ease-in-out 2s 6s forwards,
+				disappear linear 0.1ms 8s forwards;
+		}
+		
+	}
 	/*
 	 * Banner animation
 	 */
@@ -348,12 +530,7 @@ nav {
 }
 
 footer {
-	transition: opacity 2s ease-in-out 8s;
 	opacity: 0;
-	
-	.loaded & {
-		opacity: 1;
-	}
 }
 
 
@@ -383,13 +560,27 @@ footer {
 	
 	&__pic {
 		float: left;
-		margin: 0 1vmin 1vmin 0;
-		width: 30vmin;
+		margin: 0 0.5em 0.5em 0;
+		width: 265px;
+		
+		@media @mobile-mq {
+			float: none;
+			width: 90vw;
+			margin: 0 auto 0.5em auto;
+			
+		}
 	}
+	
 	
 	&__entry:nth-child(2n) .bio__pic {
 		float: right;
 		margin: 0 0 1vmin 1vmin;
+		
+		@media @mobile-mq {
+			float: none;
+			margin: 0 auto 0.5em auto;
+			
+		}
 	}
 	
 	&__entry:after {
@@ -413,8 +604,21 @@ footer {
 		animation: turn-on 500ms ease-in-out;
 	}
 	
-	[data-href] & {
-		margin: 17vmin 1em 1em 1em;
+	[data-href]:not([data-href="home"]) & {
+		
+		max-width: 1024px;
+		margin: (@desktop-header-height + 1) auto 0 auto;
+		padding: 0 1em;
+	
+	
+	
+		@media @break-banner-mq {
+			margin-top: (@break-banner-header-height + 1);
+		}
+		
+		@media @mobile-mq {
+			margin-top: (@mobile-header-height + 1);
+		}
 	}
 }
 
@@ -449,7 +653,7 @@ footer {
 .path {
 	stroke-dasharray: 3000;
 	stroke-dashoffset: 3000;
-	fill: #ffffff;
+	fill: rgba(0, 0, 0, 0);
 	stroke: #000000;
 	fill-opacity: 1;
 	fill-rule: nonzero;
@@ -464,6 +668,11 @@ footer {
 	overflow: visible;
 	enable-background: accumulate;
 	transform: translateZ(0);
+	will-change: stroke-dashoffset, fill;
+	
+	&.animation-done {
+		will-change: auto;
+	}
 }
 
 @keyframes dash {
