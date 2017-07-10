@@ -15,6 +15,7 @@
 @break-banner-header-height: 8.6em;
 @mobile-header-height: 8em;
 
+@copy-padding: 0.8em;
 
 
 /*
@@ -80,7 +81,7 @@ a {
 		position: absolute;
 		left: 50%;
 		margin-left: -@banner-width / 2;
-		clip: rect(0 @banner-width 400px 0);
+		clip: rect(0 95vw 400px 0);
 		
 		.wonderland {
 			transform: scale(1.2) translate3d(-2630px, 407px, 0)
@@ -110,7 +111,7 @@ header {
 	top: 0;
 	width: 100vw;
 	height: @desktop-header-height;
-	padding: 1vmin;
+	padding: 0 @copy-padding;
 	text-align: center;
 	z-index: 10;
 	background-color: rgba(255, 255, 255, 0);
@@ -132,7 +133,7 @@ header {
 
 nav {
 	position: absolute;
-	width: 100vw;
+	width: calc(~"100vw - @{copy-padding} * 2");
 	bottom: 0.1em;
 	z-index: 10;
 	opacity: 0;
@@ -608,7 +609,7 @@ footer {
 		
 		max-width: 1024px;
 		margin: (@desktop-header-height + 1) auto 0 auto;
-		padding: 0 1em;
+		padding: 0 @copy-padding;
 	
 	
 	
