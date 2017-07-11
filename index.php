@@ -28,6 +28,7 @@
 	*/?>
 
 	<body
+		class="no-js"
 		data-href="<?php
 			if (isset($_GET['f'])) {
 				echo $_GET['f'];
@@ -73,7 +74,7 @@
 				include "includes/" . $fragment . ".html";
 			?>
 			
-		</div>
+		</main>
 		
 		
 		

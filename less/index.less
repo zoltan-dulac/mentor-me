@@ -33,7 +33,7 @@ body {
 	 * minimizes the amount of white-space at the bottom of the photos on the
 	 * desktop breakpoint.
 	 */
-	line-height: 1.32;
+	line-height: 1.34;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -318,8 +318,8 @@ nav {
 	}
 }
 
-.loaded {
-	
+.loaded,
+.no-js {
 
 	/*
 	 * Header and Footer are controlled by transitions
@@ -598,6 +598,13 @@ footer {
  */
 
 #content {
+	opacity: 0;
+	transition: opacity 250ms ease-in-out 250ms;
+	
+	.loaded & {
+		opacity: 1;
+	}
+	
 	&.hide {
 		animation: turn-off 500ms ease-in-out;
 	}
@@ -703,20 +710,30 @@ footer {
 
 /* All HTML5 progress enabled browsers */
 #preloader {
-
+	@preloader-background: white;
+	@progress-background: url('../images/hiroic.svg') no-repeat;
+	@progress-background-size: cover;
+	
+	@image-aspect-ratio: 370 / 320;
+	@image-width: 10vmin;
+	@image-height: @image-width / @image-aspect-ratio;
+	
 	/* Turns off styling - not usually needed, but good to know. */
 	appearance: none;
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	/* gets rid of default border in Firefox and Opera. */
-	border: solid rgba(16, 16, 16, 0.8) 1px;
+	border: none;
 	border-radius: 10px;
 	/* Dimensions */
-	width: 238px;
-	height: 45px;
+	width: @image-width ;
+	height: @image-height;
 	position: absolute;
-	left: calc(~"50vw - 238px / 2");
-	top: calc(~"50vh - 45px / 2");
+	left: calc(~"50vw - @{image-width} / 2");
+	top: calc(~"50vh - @{image-height} / 2");
+	opacity: 0;
+	transform: translateZ(0);
+	transition: opacity 250ms ease-in-out 250ms;
 
 	/*
 	 * Background of the progress bar background
@@ -724,11 +741,11 @@ footer {
 	
 	/* Firefox and Polyfill */
 	& {
-		background: #fff !important; /* !important only needed in polyfill */
+		background: @preloader-background !important; /* !important only needed in polyfill */
 	}
 	/* Chrome */
 	&::-webkit-progress-bar {
-		background: #fff;
+		background: @preloader-background;
 	}
 	/*
 	 * Background of the progress bar value
@@ -736,31 +753,23 @@ footer {
 	
 	/* Firefox */
 	&::-moz-progress-bar {
-		border-radius: 5px;
-		background-image: -moz-linear-gradient(
-			center bottom,
-			rgba(43,194,83, 0.2) 37%,
-			rgba(84,240,84, 0.2) 69%
-		);
+		background: @progress-background;
+		background-size: @progress-background-size;
 	}
 	/* Chrome */
 	&::-webkit-progress-value {
-		border-radius: 5px;
-		background-image: -webkit-gradient(
-			linear,
-			left bottom,
-			left top,
-			color-stop(0, rgba(43,194,83, 0.2)),
-			color-stop(1, rgba(84,240,84, 0.2))
-		);
-		background-image: -webkit-linear-gradient(
-			center bottom,
-			rgba(43,194,83, 0.2) 37%,
-			rgba(84,240,84, 0.2) 69%
-		);
+		background: @progress-background;
+		background-size: @progress-background-size;
 	}
 	
+	.preloading & {
+		opacity: 0.2;
+	}
 	.loaded & {
+		opacity: 0;
+	}
+	
+	.no-js & {
 		display: none;
 	}
 }

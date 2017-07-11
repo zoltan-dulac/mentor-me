@@ -1,65 +1,70 @@
 
 var preloader = new function () {
-  var me = this,
-    dataset = document.body.dataset,
-    preloadImages = dataset.preloadImages ? dataset.preloadImages.split(',') : [],
-    imageDir = dataset.imageDir,
-    preloadSounds = dataset.preloadSounds ? dataset.preloadSounds.split(',') : [],
-    totalToLoad = preloadImages.length + preloadSounds.length,
-    soundDir = dataset.soundDir,
-    images = [],
-    numLoaded = 0,
-    el = document.getElementById('preloader'),
-    i;
-    
-    function assetErrorHandler(e) {
-      console.error(`Error: invalid image ${e.target.src}`);
-      assetLoadHandler();
-    }
-    
-    
-    function assetLoadHandler() {
-      requestAnimationFrame(imageLoadFrame);
-    }
-    
-    function imageLoadFrame() {
-      numLoaded ++;
-      if (numLoaded == images.length) {
-        el.className = 'hidden';
-        me.callback();
-      }
-      
-      el.value = numLoaded;
-      el.innerHTML = `<strong>Loaded ${numLoaded * 100 / images.length}%.`
-    }
-    
-    
-    
-    me.init = function(callback) {
-      me.callback = callback;
-      for (i = 0; i < preloadImages.length; i++) {
-        var image = new Image();
-        image.onload = assetLoadHandler;
-        image.onerror = assetErrorHandler;
-        image.src = `${imageDir}/${preloadImages[i]}`;
-        images.push(image);
-      }
-      
-      for (i=0; i<preloadSounds.length; i++) {
-        var file = preloadSounds[i];
-        
-        // Don't execute if Howl lib not loaded.
-        if (window.Howl) {
-          game.sounds[file] = new Howl({
-            autoplay: (i === 'kc-move'),
-            src: ['sounds/' + file + '.wav'],
-            loop: (i === 'kc-move'),
-            onload: assetLoadHandler,
-            onloaderror: assetErrorHandler,
-          });
-        }
-      }
-    }
+	var me = this,
+		bodyEl = document.body,
+		dataset = bodyEl.dataset,
+		bodyClassList = bodyEl.classList,
+		preloadImages = dataset.preloadImages ? dataset.preloadImages.split(',') : [],
+		imageDir = dataset.imageDir,
+		preloadSounds = dataset.preloadSounds ? dataset.preloadSounds.split(',') : [],
+		totalToLoad = preloadImages.length + preloadSounds.length,
+		soundDir = dataset.soundDir,
+		images = [],
+		numLoaded = 0,
+		el = document.getElementById('preloader'),
+		i;
+		
+		function assetErrorHandler(e) {
+			console.error(`Error: invalid image ${e.target.src}`);
+			assetLoadHandler();
+		}
+		
+		
+		function assetLoadHandler() {
+			requestAnimationFrame(imageLoadFrame);
+		}
+		
+		function imageLoadFrame() {
+			numLoaded ++;
+			if (numLoaded == images.length) {
+				el.className = 'hidden';
+				
+				bodyClassList.remove('preloading');
+				me.callback();
+			}
+			
+			el.value = numLoaded;
+			el.innerHTML = `<strong>Loaded ${numLoaded * 100 / images.length}%.`
+		}
+		
+		
+		
+		me.init = function(callback) {
+			bodyClassList.add('preloading');
+			me.callback = callback;
+			for (i = 0; i < preloadImages.length; i++) {
+				var image = new Image();
+				image.onload = assetLoadHandler;
+				image.onerror = assetErrorHandler;
+				image.src = `${imageDir}/${preloadImages[i]}`;
+				images.push(image);
+			}
+			
+			for (i=0; i<preloadSounds.length; i++) {
+				var file = preloadSounds[i];
+				
+				// Don't execute if Howl lib not loaded.
+				if (window.Howl) {
+					game.sounds[file] = new Howl({
+						autoplay: (i === 'kc-move'),
+						src: ['sounds/' + file + '.wav'],
+						loop: (i === 'kc-move'),
+						onload: assetLoadHandler,
+						onloaderror: assetErrorHandler,
+					});
+				}
+			}
+		}
 }
 
 
@@ -79,7 +84,8 @@ var mentorMe = new function () {
 		newContent;
 	
 	me.init = function () {
-	  preloader.init(me.onLoad);
+		$body.classList.remove('no-js');
+		preloader.init(me.onLoad);
 	}
 	
 	me.onLoad = function () {
@@ -178,41 +184,41 @@ var mentorMe = new function () {
 			$animatedArea.classList.add('hide');
 			readATNowShowingMessage(currentState.f);
 		}
- 	};
- 	
- 	/*
- 	 * Updates the page's alert area that assistive technologies such as 
- 	 * screenreaders will use to inform the user the page has changed.
- 	 */
- 	function readATNowShowingMessage(pageName) {
- 		$screenReaderAlert.innerHTML = 'Now viewing <strong>' + pageName + '<strong> page.';
- 	}
- 	
- 	function hideTransitionEndEvent(e) {
- 		/*
- 		 * set the content area of the page to the data inside the private
- 		 * variable `newContent` and show the animation.  When that show animation
- 		 * finishes, fire the `showTransitionEndEvent` method.
- 		 */
- 		$animatedArea.removeEventListener('animationend', hideTransitionEndEvent);
+	};
+	
+	/*
+	 * Updates the page's alert area that assistive technologies such as 
+	 * screenreaders will use to inform the user the page has changed.
+	 */
+	function readATNowShowingMessage(pageName) {
+		$screenReaderAlert.innerHTML = 'Now viewing <strong>' + pageName + '<strong> page.';
+	}
+	
+	function hideTransitionEndEvent(e) {
+		/*
+		 * set the content area of the page to the data inside the private
+		 * variable `newContent` and show the animation.	When that show animation
+		 * finishes, fire the `showTransitionEndEvent` method.
+		 */
+		$animatedArea.removeEventListener('animationend', hideTransitionEndEvent);
 		$animatedArea.addEventListener('animationend', showTransitionEndEvent);
 		$content.innerHTML = newContent;
 		
 		$animatedArea.classList.remove('hide');
 		$animatedArea.classList.add('show');
 		
- 		$body.setAttribute('data-href', currentState.f);
- 	}
- 	
- 	function showTransitionEndEvent(e) {
- 		/*
- 		 * scroll to the top of the page and clean up the page.
- 		 */
- 		window.scrollTo(0, 0);
- 		$animatedArea.removeEventListener('animationend', showTransitionEndEvent);
- 		$animatedArea.classList.remove('show', 'hide');
- 		$body.classList.add('loaded');
- 	}
+		$body.setAttribute('data-href', currentState.f);
+	}
+	
+	function showTransitionEndEvent(e) {
+		/*
+		 * scroll to the top of the page and clean up the page.
+		 */
+		window.scrollTo(0, 0);
+		$animatedArea.removeEventListener('animationend', showTransitionEndEvent);
+		$animatedArea.classList.remove('show', 'hide');
+		$body.classList.add('loaded');
+	}
 	 
 };
 
