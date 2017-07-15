@@ -53,6 +53,7 @@ a:hover {
 #banner {
   height: 90px;
   overflow: visible;
+  pointer-events: none;
 }
 @media only screen and (max-width: 860px) {
   #banner {
@@ -105,6 +106,9 @@ header {
 }
 header .nav-logo {
   height: 0.9em;
+}
+header h1 a {
+  display: block;
 }
 nav {
   position: absolute;
@@ -191,7 +195,13 @@ nav .mobile-nav {
 }
 [data-href="dates-times"] .logo {
   height: 4em;
-  margin-bottom: 1em;
+  margin-bottom: -0.5em;
+}
+[data-href="dates-times"] h3 {
+  margin-top: 2em;
+}
+[data-href="dates-times"] h3:first-child {
+  margin-top: 1em;
 }
 [data-href="contact"] main {
   text-align: center;
@@ -218,6 +228,7 @@ nav .mobile-nav {
   top: -20vh;
   left: 50%;
   margin-left: -50vh;
+  transform: translate3d(0, 0, 0) rotate(0deg) scaleX(1) scaleY(1);
   transform-origin: 50% 60%;
 }
 .home__demo .charles {
@@ -316,7 +327,7 @@ nav .mobile-nav {
 }
 .loaded[data-href="home"] .home__demo .swirl,
 .no-js[data-href="home"] .home__demo .swirl {
-  animation: fade-in ease-in-out 2s 2s forwards, swirl linear 5s 2s 2, fade-out ease-in-out 2s 6s forwards, disappear linear 0.1ms 8s forwards;
+  animation: fade-in ease-in-out 2s 2s forwards, swirl linear 5s 2s 2, fade-out ease-in-out 2s 6s forwards;
 }
 .loaded #banner .path,
 .no-js #banner .path {
@@ -437,10 +448,10 @@ nav .mobile-nav {
 }
 @keyframes swirl {
   0% {
-    transform: rotate(0deg);
+    transform: translate3d(0, 0, 0) rotate(0deg) scaleX(1) scaleY(1);
   }
   100% {
-    transform: rotate(360deg);
+    transform: translate3d(0, 0, 0) rotate(360deg) scaleX(1) scaleY(1);
   }
 }
 @keyframes fade-in {
@@ -584,10 +595,10 @@ footer {
   opacity: 1;
 }
 #content.hide {
-  animation: turn-off 500ms ease-in-out;
+  animation: turn-off 500ms ease-in-out forwards;
 }
 #content.show {
-  animation: turn-on 500ms ease-in-out;
+  animation: turn-on 500ms ease-in-out forwards;
 }
 [data-href]:not([data-href="home"]) #content {
   max-width: 1024px;

@@ -12,6 +12,7 @@ var preloader = new function () {
 		images = [],
 		numLoaded = 0,
 		el = document.getElementById('preloader'),
+		pathEls = document.getElementsByClassName('path'),
 		i;
 		
 		function assetErrorHandler(e) {
@@ -37,10 +38,9 @@ var preloader = new function () {
 			el.innerHTML = `<strong>Loaded ${numLoaded * 100 / images.length}%.`
 		}
 		
-		
-		
 		me.init = function(callback) {
 			bodyClassList.add('preloading');
+			
 			me.callback = callback;
 			for (i = 0; i < preloadImages.length; i++) {
 				var image = new Image();
@@ -64,7 +64,9 @@ var preloader = new function () {
 					});
 				}
 			}
+			
 		}
+		
 }
 
 
@@ -120,6 +122,15 @@ var mentorMe = new function () {
 			currentState.f = 'home';
 		}
 		
+		/*
+		 * For home -- we want to restart the animation without the navigation
+		 */
+		console.log('asdad', currentState.f);
+		if (currentState.f === 'home') {
+			$body.classList.remove('loaded');
+			
+		}
+		
 		/* See if this information was cached */
 		var cachedData = cache[currentState.f];
 		
@@ -172,14 +183,7 @@ var mentorMe = new function () {
 			
 			$animatedArea.addEventListener('animationend', hideTransitionEndEvent);
 			newContent = cache[currentState.f];
-			/*
-			 * For home -- we want to restart the animation without the navigation
-			 */
-			console.log('asdad', currentState.f);
-			if (currentState.f === 'home') {
-				$body.classList.remove('loaded');
-				
-			}
+			
 			$animatedArea.classList.remove('show');
 			$animatedArea.classList.add('hide');
 			readATNowShowingMessage(currentState.f);
@@ -204,10 +208,13 @@ var mentorMe = new function () {
 		$animatedArea.addEventListener('animationend', showTransitionEndEvent);
 		$content.innerHTML = newContent;
 		
-		$animatedArea.classList.remove('hide');
-		$animatedArea.classList.add('show');
+		requestAnimationFrame(function() {
+			$animatedArea.classList.remove('hide');
+			$animatedArea.classList.add('show');
+			
+			$body.setAttribute('data-href', currentState.f);
+		})
 		
-		$body.setAttribute('data-href', currentState.f);
 	}
 	
 	function showTransitionEndEvent(e) {

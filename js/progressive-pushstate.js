@@ -614,6 +614,10 @@ var pp = new function () {
 		
 		var params = queryStringToObject(qs);
 		
+		if (me.lastState === undefined) {
+			me.lastState = {};
+		}
+		
 		/* Insert the how many pages in history this page is */
 		if (me.lastState._ppPageNum === undefined && e.state === undefined) {
 			params._ppPageNum = 0;

@@ -74,6 +74,7 @@ a {
 	@banner-height: 90px;
 	height: @banner-height;
 	overflow: visible;
+	pointer-events: none;
 	
 	@media @break-banner-mq {
 		@banner-width: 575px;
@@ -128,6 +129,10 @@ header {
 	
 	.nav-logo {
 		height: 0.9em;
+	}
+	
+	h1 a {
+		display: block;
 	}
 }
 
@@ -236,8 +241,17 @@ nav {
 	
 	.logo {
 		height: 4em;
-		margin-bottom: 1em;
+		margin-bottom: -0.5em;
 	}
+	
+	h3 {
+		margin-top: 2em;
+	}
+	
+	h3:first-child {
+		margin-top: 1em;
+	}
+	
 }
 
 [data-href="contact"] {
@@ -274,6 +288,7 @@ nav {
 		top: ~'-20@{museum-height-unit}';
 		left: 50%;
 		margin-left: ~'-50@{museum-height-unit}';
+		transform: translate3d(0, 0, 0) rotate(0deg) scaleX(1) scaleY(1);
 		transform-origin: 50% 60%;
 	}
 	
@@ -386,8 +401,8 @@ nav {
 			animation: 
 				fade-in ease-in-out 2s 2s forwards,
 				swirl linear 5s 2s 2,
-				fade-out ease-in-out 2s 6s forwards,
-				disappear linear 0.1ms 8s forwards;
+				fade-out ease-in-out 2s 6s forwards;
+				// disappear linear 0.1ms 8s forwards;
 		}
 		
 	}
@@ -422,10 +437,10 @@ nav {
 
 @keyframes swirl {
 	0% {
-	transform: rotate(0deg);
+	transform: translate3d(0, 0, 0) rotate(0deg) scaleX(1) scaleY(1);
 	}
 	100% {
-	transform: rotate(360deg);
+	transform: translate3d(0, 0, 0) rotate(360deg) scaleX(1) scaleY(1);
 	}
 }
 
@@ -606,11 +621,11 @@ footer {
 	}
 	
 	&.hide {
-		animation: turn-off 500ms ease-in-out;
+		animation: turn-off 500ms ease-in-out forwards;
 	}
 	
 	&.show {
-		animation: turn-on 500ms ease-in-out;
+		animation: turn-on 500ms ease-in-out forwards;
 	}
 	
 	[data-href]:not([data-href="home"]) & {
