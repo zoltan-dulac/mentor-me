@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-CA">
+<html class="no-js" lang="en-CA">
 	<head>
 		<meta charset="utf-8">
 
@@ -19,7 +19,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 		<link rel="stylesheet" href="css/index.css" type="text/css" />
-
+		<script>document.getElementsByTagName('html')[0].classList.remove('no-js')</script>
 	</head>
 	
 	<?php
@@ -28,7 +28,6 @@
 	*/?>
 
 	<body
-		class="no-js"
 		data-href="<?php
 			if (isset($_GET['f'])) {
 				echo $_GET['f'];

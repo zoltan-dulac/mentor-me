@@ -59,9 +59,9 @@ var pp = new function () {
 		 * have support, set a class on the body tag to indicate so, and leave.
 		 */
 		if (history.pushState) {
-			htmlEl.className += 'pp-support';
+			htmlEl.className += ' pp-support';
 		} else {
-			htmlEl.className += 'pp-no-support';
+			htmlEl.className += ' pp-no-support';
 			return;
 		}
 		me.options = (options || {});

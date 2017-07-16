@@ -16,7 +16,6 @@ var preloader = new function () {
 		i;
 		
 		function assetErrorHandler(e) {
-			console.error(`Error: invalid image ${e.target.src}`);
 			assetLoadHandler();
 		}
 		
@@ -86,7 +85,6 @@ var mentorMe = new function () {
 		newContent;
 	
 	me.init = function () {
-		$body.classList.remove('no-js');
 		preloader.init(me.onLoad);
 	}
 	
@@ -125,7 +123,6 @@ var mentorMe = new function () {
 		/*
 		 * For home -- we want to restart the animation without the navigation
 		 */
-		console.log('asdad', currentState.f);
 		if (currentState.f === 'home') {
 			$body.classList.remove('loaded');
 			
