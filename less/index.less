@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h2 {
 	font-size: 2em;
-	margin: 0 0 1em 0;
+	margin: 0 0 0.2em 0;
 }
 
 h3 {
@@ -67,6 +67,11 @@ a {
 	&:hover {
 		text-decoration: underline;
 	}
+}
+
+.acknowledgments {
+	text-align: right;
+	font-size: 0.6em;
 }
 
 
@@ -321,11 +326,14 @@ nav {
 
 
 .museum {
+	@img-height: 80vh;
+	@img-width: (@img-height * 458 / 573);
+	@half-img-width: @img-width / 2;
 	position: absolute;
 	top: 0;
 	left: 50vw;
-	margin-left: ~'-31@{museum-height-unit}';
-	clip: rect(2px 100vw 100vh 0); 
+	margin-left: 0 - @half-img-width;
+	clip: rect(2px ~"calc(@{half-img-width} + 49vw)" 100vh ~"calc(@{half-img-width} - 49vw)"); 
 
 	img {
 		height: ~'80@{museum-height-unit}';
@@ -577,7 +585,7 @@ footer {
 	
 	&__pic {
 		float: left;
-		margin: 0 0.5em 0.5em 0;
+		margin: 0 0.5em 0 0;
 		width: 265px;
 		
 		@media @mobile-mq {

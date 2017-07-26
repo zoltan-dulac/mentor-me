@@ -2,17 +2,41 @@
 <html class="no-js" lang="en-CA">
 	<head>
 		<meta charset="utf-8">
-
-		<title>Hiroic Products Presents: Mentor Me Through This Wonderland</title>
-		<meta name="description" content="#DESC#">
+		
+		<?php
+			$titles = array (
+				"about" => "About the Play",
+				"bios" => "Bios of the Artists Involved",
+				"contact" => "How to Contact Us",
+				"dates-times" => "When and Where We're Performing"
+			);
+			
+			
+			if (isset($_GET['f'])) {
+				$f = $_GET['f'];
+			} else {
+				$f = 'home';
+			}
+			
+			if ( isset($f) && isset($titles[$f])) {
+				$title = " - " . $titles[$f];
+			} else {
+				$title = "";
+			}
+		?>
+		
+		<title>
+			Hiroic Products Presents: Mentor Me Through This Wonderland <?php echo $title ?>
+		</title>
+		<meta name="description" content="Mentor Me Through This Wonderland (Part 1) is proud to be having its World Premiere at the Windsor-Walkerville Fringe Festival!">
 		<meta name="author" content="zoltan">
 
-		<meta property="og:title" content="Hiroic Products Presents: Mentor Me Through This Wonderland" />
+		<meta property="og:title" content="Hiroic Products Presents: Mentor Me Through This Wonderland <?php echo $title ?>" />
 		<meta property="og:description" content="Mentor Me Through This Wonderland (Part 1) is proud to be having its World Premiere at the Windsor-Walkerville Fringe Festival!" />
 		<meta property="og:image" content="previews/index.jpg" />
 
 		<meta name="twitter:card" content="photo">
-		<meta name="twitter:title" content="Hiroic Products Presents: Mentor Me Through This Wonderland">
+		<meta name="twitter:title" content="Hiroic Products Presents: Mentor Me Through This Wonderland <?php echo $title ?>">
 		<meta name="twitter:image" content="previews/index.jpg">
 		<meta name="author" content="Lorne Hiro and Zoltan Hawryluk">
 
@@ -29,8 +53,8 @@
 
 	<body
 		data-href="<?php
-			if (isset($_GET['f'])) {
-				echo $_GET['f'];
+			if (isset($f)) {
+				echo $f;
 			} else {
 				echo 'home';
 			}?>"
@@ -56,7 +80,6 @@
 						<option value="dates-times">Dates and Times</option>
 						<option value="bios">Bios</option>
 						<option value="contact">Contact</option>
-						<option value="press">Press</option>
 					</select>
 					
 				</form>
@@ -83,7 +106,7 @@
 				role="alert"
 				aria-relevant="all"
 				aria-live="assertive"
-			>Now displaying the <strong class="page-name"><?php echo $_GET["f"]; ?></strong> page.</div>
+			>Now displaying the <strong class="page-name"><?php echo $f; ?></strong> page.</div>
 			
 		<progress id="preloader" max="21" value="0">
 			<strong>Loaded 0%.</strong>
