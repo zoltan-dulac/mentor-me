@@ -138,7 +138,7 @@ var mentorMe = new function () {
 		if (cachedData === undefined) {
 			
 			$jxr = new XMLHttpRequest();
-			$jxr.open('GET', 'includes/' + currentState.f + '.html');
+			$jxr.open('GET', 'includes/' + currentState.f + '.html' + '?' + new Date().getTime());
 			$jxr.onload = function () {
 				if ($jxr.status = 200) {
 				

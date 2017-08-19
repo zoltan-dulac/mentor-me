@@ -34,6 +34,9 @@ h2 {
 h3 {
   margin: 3em 0 1em 0;
 }
+.centered {
+  text-align: center;
+}
 i,
 em {
   display: inline-flex;
@@ -561,6 +564,10 @@ footer {
   border-bottom: solid 1px black;
   margin-bottom: 3vmin;
 }
+.bio__entry:last-child {
+  border-bottom: none;
+  overflow: none;
+}
 .bio__pic {
   float: left;
   margin: 0 0.5em 0 0;
@@ -572,6 +579,13 @@ footer {
     width: 90vw;
     margin: 0 auto 0.5em auto;
   }
+}
+.bio__entry--no-copy {
+  text-align: center;
+}
+.bio__entry--no-copy .bio__pic {
+  float: none;
+  margin: 0 auto;
 }
 .bio__entry:nth-child(2n) .bio__pic {
   float: right;
