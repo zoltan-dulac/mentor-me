@@ -128,12 +128,15 @@ nav ul {
   width: 100vw;
   text-align: center;
 }
+nav ul.contact-us-list {
+  margin-bottom: 2em;
+}
 nav li {
   display: inline-block;
   margin-right: 4vw;
 }
 nav li.social {
-  margin-right: 0.3em;
+  margin: 0.3em;
   transform: translateY(0.2em);
 }
 nav li:last-child {
@@ -217,6 +220,7 @@ nav .mobile-nav {
   display: inline-block;
   text-align: left;
   line-height: 1.7;
+  margin-bottom: 2em;
 }
 [data-href="contact"] main .nav-logo {
   height: 0.9em;
